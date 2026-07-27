@@ -1,4 +1,4 @@
-// backend/notification-service/src/index.js
+// backend/notification-service/src/index.js file
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
