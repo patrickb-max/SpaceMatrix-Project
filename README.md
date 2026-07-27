@@ -224,3 +224,103 @@ git add .
 git commit -m "feat: initialize SpaceMatrix 4-microservices architecture with SvelteKit frontend & Docker automation"
 git push origin main
 
+🛠️ Phase 2: Manual Local Development Setup
+We will first run the project manually to ensure all microservices and database queries work properly on bare metal.
+
+Step 1: Start MongoDB
+Launch MongoDB Community Server locally.
+
+Open MongoDB Compass.
+
+Connect to mongodb://127.0.0.1:27017 and verify connection.
+
+Step 2: Initialize Microservices
+Run these commands in your VS Code terminal to create package files and install dependencies for each service:
+
+1. Property Microservice (Port 3001)
+Bash
+cd backend/property-service
+npm init -y
+npm install express mongoose cors dotenv
+Create backend/property-service/.env:
+
+Code snippet
+PORT=3001
+MONGO_URI=mongodb://127.0.0.1:27017/spacematrix
+2. Inquiry Microservice (Port 3002)
+Bash
+cd ../inquiry-service
+npm init -y
+npm install express mongoose cors dotenv
+Create backend/inquiry-service/.env:
+
+Code snippet
+PORT=3002
+MONGO_URI=mongodb://127.0.0.1:27017/spacematrix
+3. Analytics Microservice (Port 3003)
+Bash
+cd ../analytics-service
+npm init -y
+npm install express mongoose cors dotenv
+Create backend/analytics-service/.env:
+
+Code snippet
+PORT=3003
+MONGO_URI=mongodb://127.0.0.1:27017/spacematrix
+4. Notification Microservice (Port 3004)
+Bash
+cd ../notification-service
+npm init -y
+npm install express cors dotenv
+Create backend/notification-service/.env:
+
+Code snippet
+PORT=3004
+Step 3: Initialize SvelteKit Frontend
+Navigate back to the project root and create your frontend app:
+
+Bash
+# Return to root directory
+cd ../..
+
+# Initialize SvelteKit project
+npm create svelte@latest frontend
+Select SvelteKit minimal project, JS with JSDoc, and accept defaults.
+
+Bash
+cd frontend
+npm install
+Step 4: Run Microservices & Test
+Open 4 terminal split tabs in VS Code (Ctrl + Shift + ** or click +` in terminal view).
+
+Start each microservice in its respective terminal tab:
+
+Tab 1: cd backend/property-service && npm start
+
+Tab 2: cd backend/inquiry-service && npm start
+
+Tab 3: cd backend/analytics-service && npm start
+
+Tab 4: cd backend/notification-service && npm start
+
+Open a 5th terminal tab and launch the SvelteKit frontend:
+
+Tab 5: cd frontend && npm run dev
+
+Open your browser to http://localhost:5173/.
+
+Step 5: Seed Sample Data
+Run this command in VS Code terminal to insert initial commercial listings into MongoDB:
+
+Bash
+curl -X POST http://localhost:3001/api/v1/properties \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Silicon Hub Tower",
+    "description": "Prime corporate office space in downtown financial district with modern glass facade.",
+    "propertyType": "office",
+    "totalArea": 5500,
+    "rentPerSqFt": 4.5,
+    "totalMonthlyRent": 24750,
+    "images": ["https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80"]
+  }'
