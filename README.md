@@ -73,6 +73,8 @@ cd ../..
 npm create svelte@latest frontend
 Select SvelteKit minimal project, JS with JSDoc, and accept defaults.
 
+  npx sv create frontend
+
 Bash
 cd frontend
 npm install
