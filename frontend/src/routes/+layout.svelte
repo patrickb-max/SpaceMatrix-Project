@@ -1,26 +1,21 @@
 <script lang="ts">
-  export let data;
+  let { children } = $props();
 </script>
 
-<div class="app-root">
-  <slot />
-</div>
+<main class="app-container">
+  {@render children()}
+</main>
 
 <style>
-  :global(*, *::before, *::after) {
-    box-sizing: border-box;
-  }
-
   :global(body) {
     margin: 0;
-    padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background-color: #f8fafc;
-    color: #1e293b;
-    line-height: 1.5;
+    color: #0f172a;
   }
-
-  .app-root {
-    min-height: 100vh;
+  .app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
   }
 </style>
