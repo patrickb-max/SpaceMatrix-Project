@@ -1,0 +1,21 @@
+
+
+# Dependencies
+
+node_modules/
+
+# Environment Variables / Secrets
+
+.env
+
+.env.local
+
+
+# Logs
+
+*.log
+
+# Build Outputs
+
+dist/
+build/
