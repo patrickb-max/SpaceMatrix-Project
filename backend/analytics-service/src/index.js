@@ -20,3 +20,5 @@ mongoose.connect(MONGO_URI)
     app.listen(PORT, () => console.log(`🚀 Analytics Service running on port ${PORT}`));
   })
   .catch(err => console.error('❌ Analytics Service DB Error:', err));
+
+  # verified
