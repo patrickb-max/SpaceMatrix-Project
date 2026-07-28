@@ -4,12 +4,14 @@ Manual to automation process of a Project
 📋 Phase 1: Create the Project Directory Structure
 Open a terminal inside VS Code (Terminal -> New Terminal) and run this command to generate all folders at once:
 
-  Bash
-    mkdir -p backend/property-service/src/{controllers,models,routes} \
-    mkdir -p backend/inquiry-service/src/{controllers,models,routes} \
-    mkdir -p backend/analytics-service/src/{controllers,models,routes} \
-    mkdir -p backend/notification-service/src/{controllers,routes} \
-    mkdir database
+    Bash
+        mkdir -p backend/property-service/src/{controllers,models,routes} \
+        mkdir -p backend/inquiry-service/src/{controllers,models,routes} \
+        mkdir -p backend/analytics-service/src/{controllers,models,routes} \
+        mkdir -p backend/notification-service/src/{controllers,routes} \
+        mkdir database
+
+
 🛠️ Phase 2: Manual Local Development Setup
     We will first run the project manually to ensure all microservices and database queries work properly on bare metal.
 
