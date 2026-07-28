@@ -62,6 +62,78 @@ const sampleProperties = [
     rentPerSqFt: 0.95,
     totalMonthlyRent: 38000,
     images: ['https://images.unsplash.com/photo-1587293852726-70cdb56c2866']
+  },
+  {
+    name: 'Silicon Hub Tower',
+    description: 'Prime corporate office space in downtown financial district.',
+    propertyType: 'office',
+    totalArea: 5500,
+    rentPerSqFt: 4.5,
+    totalMonthlyRent: 24750,
+    images: ['https://images.unsplash.com/photo-1486406146926-c627a92ad1ab']
+  },
+  {
+    name: 'LogiPark Depot West',
+    description: 'High-ceiling logistics warehouse near major expressways.',
+    propertyType: 'warehouse',
+    totalArea: 25000,
+    rentPerSqFt: 1.2,
+    totalMonthlyRent: 30000,
+    images: ['https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d']
+  },
+  {
+    name: 'Metro Walk Galleria',
+    description: 'High foot-traffic retail storefront space in central shopping district.',
+    propertyType: 'retail',
+    totalArea: 3200,
+    rentPerSqFt: 6.0,
+    totalMonthlyRent: 19200,
+    images: ['https://images.unsplash.com/photo-1555396273-367ea4eb4db5']
+  },
+  {
+    name: 'Apex Innovation Center',
+    description: 'Modern open-plan tech office with panoramic city views and private terrace.',
+    propertyType: 'office',
+    totalArea: 8200,
+    rentPerSqFt: 5.0,
+    totalMonthlyRent: 41000,
+    images: ['https://images.unsplash.com/photo-1497366216548-37526070297c']
+  },
+  {
+    name: 'Harbor Freight Terminal',
+    description: 'Secure industrial storage facility equipped with 8 loading docks.',
+    propertyType: 'warehouse',
+    totalArea: 40000,
+    rentPerSqFt: 0.95,
+    totalMonthlyRent: 38000,
+    images: ['https://images.unsplash.com/photo-1587293852726-70cdb56c2866']
+  },
+  {
+    name: 'The Glasshouse Boulevard',
+    description: 'Luxury corner retail space ideal for high-end fashion or flagship store.',
+    propertyType: 'retail',
+    totalArea: 2100,
+    rentPerSqFt: 7.5,
+    totalMonthlyRent: 15750,
+    images: ['https://images.unsplash.com/photo-1441986300917-64674bd600d8']
+  },
+  {
+    name: 'Skyline Executive Suites',
+    description: 'Fully furnished boutique office floors designed for legal and financial firms.',
+    propertyType: 'office',
+    totalArea: 4200,
+    rentPerSqFt: 6.2,
+    totalMonthlyRent: 26040,
+    images: ['https://images.unsplash.com/photo-1524758631624-e2822e304c36']
+  },
+  {
+    name: 'Northside Cold Storage Logistics',
+    description: 'Climate-controlled warehouse specialized for food & beverage storage.',
+    propertyType: 'warehouse',
+    totalArea: 18500,
+    rentPerSqFt: 1.8,
+    totalMonthlyRent: 33300,
+    images: ['https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1']
   }
 ];
 
