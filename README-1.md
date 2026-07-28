@@ -193,3 +193,61 @@ Collections missing in Compass: MongoDB creates collections on-demand when the f
 📜 License
 This project is open-source and available under the MIT License.
 
+
+
+
+==================================================================================================================================
+
+How the Files Connect Architecture-Wise
+
+  ┌─────────────────────────────────────────────────────────────┐
+  │                      FRONTEND (SvelteKit)                   │
+  │                                                             │
+  │   +layout.svelte ──> Wraps ──> +page.svelte                 │
+  │                                    ▲                        │
+  │  $lib/index.ts  ──> Provides ──────┼─ Types & Service URLs  │
+  │                     Endpoints      │                        │
+  │                                    │ Pre-loads data         │
+  │                              +page.ts                       │
+  └────────────────────────────────────┼────────────────────────┘
+                                       │
+            ┌──────────────────────────┼───────────────────────────┐
+            │                          │ HTTP Requests             │
+            ▼                          ▼                           ▼
+┌────────────────────────┐  ┌────────────────────┐  ┌────────────────────┐  ┌────────────────────┐
+│ Property Service       │  │ Inquiry Service    │  │ Notification Svc   │  │ Analytics Service  │
+│ (Port 3001)            │  │ (Port 3002)        │  │ (Port 3004)        │  │ (Port 3003)        │
+├────────────────────────┤  └────────────────────┘  └────────────────────┘  └────────────────────┘
+│ • routes/property.js   │
+│ • controllers/...      │
+│ • models/Property.js   │
+└───────────┬────────────┘
+            ▼
+   ┌──────────────────┐
+   │ MongoDB Database │
+   └──────────────────┘
+3. Data Flow Pathways
+
+Pathway A: Loading Properties (Filtering)
+
+  A user clicks a category tab (e.g., "Warehouse") in +page.svelte.
+  
+  setCategory('warehouse') updates the URL to /?type=warehouse via SvelteKit's goto().
+  
+  +page.ts detects the query param change, reads SERVICES.PROPERTY from $lib, and sends a GET request to [http://127.0.0.1:3001/api/v1/properties?propertyType=warehouse](http://127.0.0.1:3001/api/v1/properties?propertyType=warehouse).
+  
+  On the backend, routes/propertyRoutes.js forwards the request to getProperties in propertyController.js.
+  
+  The controller runs Property.find({ propertyType: 'warehouse' }) using the Mongoose model in property.js.
+  
+  Data flows back to +page.ts $\rightarrow$ +page.svelte $\rightarrow$ UI renders updated grid.
+  
+  Pathway B: Submitting an Inquiry
+  
+  The user clicks "Send Inquiry" on a property card and completes the form in +page.svelte.
+  
+  handleInquirySubmit() triggers three actions:
+    Primary Action: Sends a POST with InquiryPayload structure to the Inquiry Service on :3002.
+    Side-Effect 1: Sends a POST request to the Notification Service on :3004 (/send) to alert the leasing manager.
+    
+    Side-Effect 2: Sends a POST request to the Analytics Service on :3003 (/track) logging the event INQUIRY_SUBMITTED_SUCCESS.
