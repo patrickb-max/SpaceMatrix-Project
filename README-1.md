@@ -248,8 +248,8 @@ Pathway A: Loading Properties (Filtering)
   
       The user clicks "Send Inquiry" on a property card and completes the form in +page.svelte.
       
-      handleInquirySubmit() triggers three actions:
-        Primary Action: Sends a POST with InquiryPayload structure to the Inquiry Service on :3002.
-        Side-Effect 1: Sends a POST request to the Notification Service on :3004 (/send) to alert the leasing manager.
-        
-        Side-Effect 2: Sends a POST request to the Analytics Service on :3003 (/track) logging the event INQUIRY_SUBMITTED_SUCCESS.
+        handleInquirySubmit() triggers three actions:
+          Primary Action: Sends a POST with InquiryPayload structure to the Inquiry Service on :3002.
+          Side-Effect 1: Sends a POST request to the Notification Service on :3004 (/send) to alert the leasing manager.
+          
+          Side-Effect 2: Sends a POST request to the Analytics Service on :3003 (/track) logging the event INQUIRY_SUBMITTED_SUCCESS.
