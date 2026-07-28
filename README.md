@@ -22,50 +22,52 @@ Open MongoDB Compass.
 
     Connect to mongodb://127.0.0.1:27017 and verify connection.
 
-Step 2: Initialize Microservices
-    Run these commands in your VS Code terminal to create package files and install dependencies for each service:
+          
+          
+          Step 2: Initialize Microservices
+              Run these commands in your VS Code terminal to create package files and install dependencies for each service:
 
-1. Property Microservice (Port 3001)
-    Bash
-    cd backend/property-service
-    npm init -y
-    npm install express mongoose cors dotenv
-    Create backend/property-service/.env:
+          1. Property Microservice (Port 3001)
+              Bash
+              cd backend/property-service
+              npm init -y
+              npm install express mongoose cors dotenv
+              Create backend/property-service/.env:
 
-Code snippet
-    PORT=3001
-    MONGO_URI=mongodb://127.0.0.1:27017/spacematrix
-2. Inquiry Microservice (Port 3002)
-  Bash
-  cd ../inquiry-service
-  npm init -y
-  npm install express mongoose cors dotenv
-  Create backend/inquiry-service/.env:
+          Code snippet
+              PORT=3001
+              MONGO_URI=mongodb://127.0.0.1:27017/spacematrix
+          2. Inquiry Microservice (Port 3002)
+            Bash
+            cd ../inquiry-service
+            npm init -y
+            npm install express mongoose cors dotenv
+            Create backend/inquiry-service/.env:
 
-Code snippet
-    PORT=3002
-    MONGO_URI=mongodb://127.0.0.1:27017/spacematrix
-3. Analytics Microservice (Port 3003)
-    Bash
-    cd ../analytics-service
-    npm init -y
-    npm install express mongoose cors dotenv
-    Create backend/analytics-service/.env:
+          Code snippet
+              PORT=3002
+              MONGO_URI=mongodb://127.0.0.1:27017/spacematrix
+          3. Analytics Microservice (Port 3003)
+              Bash
+              cd ../analytics-service
+              npm init -y
+              npm install express mongoose cors dotenv
+              Create backend/analytics-service/.env:
 
-Code snippet
-    PORT=3003
-    MONGO_URI=mongodb://127.0.0.1:27017/spacematrix
-4. Notification Microservice (Port 3004)
-    Bash
-    cd ../notification-service
-    npm init -y
-    npm install express cors dotenv
-    Create backend/notification-service/.env:
+          Code snippet
+              PORT=3003
+              MONGO_URI=mongodb://127.0.0.1:27017/spacematrix
+          4. Notification Microservice (Port 3004)
+              Bash
+              cd ../notification-service
+              npm init -y
+              npm install express cors dotenv
+              Create backend/notification-service/.env:
 
-Code snippet
-  PORT=3004
-Step 3: Initialize SvelteKit Frontend
-  Navigate back to the project root and create your frontend app:
+          Code snippet
+            PORT=3004
+          Step 3: Initialize SvelteKit Frontend
+            Navigate back to the project root and create your frontend app:
 
 Bash
 # Return to root directory
