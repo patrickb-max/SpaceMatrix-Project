@@ -4,19 +4,20 @@
   import { goto } from '$app/navigation';
   import { SERVICES, type Property, type InquiryPayload } from '$lib';
 
-  export let data: { properties: Property[]; selectedType: string; error?: string };
+  // Svelte 5 Runes prop declaration
+  let { data }: { data: { properties: Property[]; selectedType: string; error?: string } } = $props();
 
   const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80';
 
-  // Modal & Form State
-  let activeProperty: Property | null = null;
-  let formName = '';
-  let formEmail = '';
-  let formPhone = '';
-  let formMessage = '';
-  let submitting = false;
-  let submitSuccess = false;
-  let submitError: string | null = null;
+  // Modal & Form State using Svelte 5 state runes
+  let activeProperty = $state<Property | null>(null);
+  let formName = $state('');
+  let formEmail = $state('');
+  let formPhone = $state('');
+  let formMessage = $state('');
+  let submitting = $state(false);
+  let submitSuccess = $state(false);
+  let submitError = $state<string | null>(null);
 
   const filterTabs = [
     { label: 'All Spaces', value: 'all' },
@@ -138,7 +139,7 @@
       <button
         class="tab-btn"
         class:active={data.selectedType === tab.value}
-        on:click={() => setCategory(tab.value)}
+        onclick={() => setCategory(tab.value)}
       >
         {tab.label}
       </button>
@@ -149,7 +150,7 @@
   {#if data.error}
     <div class="state-card error">
       <p>❌ {data.error}</p>
-      <button on:click={() => window.location.reload()}>Retry Connection</button>
+      <button onclick={() => window.location.reload()}>Retry Connection</button>
     </div>
   {:else if !data.properties || data.properties.length === 0}
     <div class="state-card">
@@ -181,7 +182,7 @@
                   <div class="area-tag">{item.totalArea.toLocaleString()} sq ft</div>
                 {/if}
               </div>
-              <button class="inquiry-btn" on:click={() => openInquiryModal(item)}>
+              <button class="inquiry-btn" onclick={() => openInquiryModal(item)}>
                 Send Inquiry
               </button>
             </div>
@@ -194,9 +195,15 @@
 
 <!-- Modal -->
 {#if activeProperty}
-  <div class="modal-backdrop" on:click|self={closeModal}>
+  <div 
+    class="modal-backdrop" 
+    onclick={(e) => e.target === e.currentTarget && closeModal()} 
+    onkeydown={(e) => e.key === 'Escape' && closeModal()}
+    role="button"
+    tabindex="0"
+  >
     <div class="modal-card">
-      <button class="modal-close" on:click={closeModal}>&times;</button>
+      <button class="modal-close" onclick={closeModal}>&times;</button>
       <h3>Inquire About {activeProperty.name}</h3>
       <p class="modal-sub">Submit details directly to our leasing network.</p>
 
@@ -205,7 +212,7 @@
       {:else}
         {#if submitError}<div class="alert danger">❌ {submitError}</div>{/if}
 
-        <form on:submit|preventDefault={handleInquirySubmit} class="inquiry-form">
+        <form onsubmit={(e) => { e.preventDefault(); handleInquirySubmit(); }} class="inquiry-form">
           <div class="field">
             <label for="name">Your Full Name *</label>
             <input id="name" type="text" bind:value={formName} required placeholder="Jane Doe" />

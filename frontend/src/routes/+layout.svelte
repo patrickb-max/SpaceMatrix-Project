@@ -1,6 +1,9 @@
 <!-- frontend/src/routes/+layout.svelte -->
 <script lang="ts">
-  // Any global logic or page transition handlers go here
+  import type { Snippet } from 'svelte';
+
+  // Svelte 5 snippet prop declaration
+  let { children }: { children: Snippet } = $props();
 </script>
 
 <div class="app-layout">
@@ -11,8 +14,8 @@
     </div>
   </header>
 
-  <!-- SvelteKit renders the page content inside <slot /> -->
-  <slot />
+  <!-- Svelte 5 render tag replacing <slot /> -->
+  {@render children()}
 </div>
 
 <style>

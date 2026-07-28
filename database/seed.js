@@ -44,6 +44,24 @@ const sampleProperties = [
     rentPerSqFt: 6.0,
     totalMonthlyRent: 19200,
     images: ['https://images.unsplash.com/photo-1555396273-367ea4eb4db5']
+  },
+  {
+    name: 'Apex Innovation Center',
+    description: 'Modern open-plan tech office with panoramic city views.',
+    propertyType: 'office',
+    totalArea: 8200,
+    rentPerSqFt: 5.0,
+    totalMonthlyRent: 41000,
+    images: ['https://images.unsplash.com/photo-1497366216548-37526070297c']
+  },
+  {
+    name: 'Harbor Freight Terminal',
+    description: 'Secure industrial storage facility with multiple loading docks.',
+    propertyType: 'warehouse',
+    totalArea: 40000,
+    rentPerSqFt: 0.95,
+    totalMonthlyRent: 38000,
+    images: ['https://images.unsplash.com/photo-1587293852726-70cdb56c2866']
   }
 ];
 
