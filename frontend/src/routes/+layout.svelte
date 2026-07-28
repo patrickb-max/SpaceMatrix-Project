@@ -1,21 +1,50 @@
+<!-- frontend/src/routes/+layout.svelte -->
 <script lang="ts">
-  let { children } = $props();
+  // Any global logic or page transition handlers go here
 </script>
 
-<main class="app-container">
-  {@render children()}
-</main>
+<div class="app-layout">
+  <header class="header">
+    <div class="header-content">
+      <h1>SpaceMatrix</h1>
+      <p>Next-generation commercial space directory and leasing portal.</p>
+    </div>
+  </header>
+
+  <!-- SvelteKit renders the page content inside <slot /> -->
+  <slot />
+</div>
 
 <style>
   :global(body) {
     margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background-color: #f8fafc;
-    color: #0f172a;
+    color: #1e293b;
   }
-  .app-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
+
+  .app-layout {
+    min-height: 100vh;
+  }
+
+  .header {
+    background: #0f172a;
+    color: #ffffff;
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+
+  .header-content h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+  }
+
+  .header-content p {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 1.1rem;
   }
 </style>
