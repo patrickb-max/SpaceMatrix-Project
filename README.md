@@ -4,31 +4,31 @@ Manual to automation process of a Project
 📋 Phase 1: Create the Project Directory Structure
 Open a terminal inside VS Code (Terminal -> New Terminal) and run this command to generate all folders at once:
 
-Bash
-  mkdir -p backend/property-service/src/{controllers,models,routes} \
-   mkdir -p        backend/inquiry-service/src/{controllers,models,routes} \
-    mkdir -p       backend/analytics-service/src/{controllers,models,routes} \
-     mkdir -p      backend/notification-service/src/{controllers,routes} \
-       mkdir     database
+  Bash
+    mkdir -p backend/property-service/src/{controllers,models,routes} \
+    mkdir -p backend/inquiry-service/src/{controllers,models,routes} \
+    mkdir -p backend/analytics-service/src/{controllers,models,routes} \
+    mkdir -p backend/notification-service/src/{controllers,routes} \
+    mkdir database
 🛠️ Phase 2: Manual Local Development Setup
-  We will first run the project manually to ensure all microservices and database queries work properly on bare metal.
+    We will first run the project manually to ensure all microservices and database queries work properly on bare metal.
 
 Step 1: Start MongoDB
-  Launch MongoDB Community Server locally.
+    Launch MongoDB Community Server locally.
 
 Open MongoDB Compass.
 
-  Connect to mongodb://127.0.0.1:27017 and verify connection.
+    Connect to mongodb://127.0.0.1:27017 and verify connection.
 
 Step 2: Initialize Microservices
-  Run these commands in your VS Code terminal to create package files and install dependencies for each service:
+    Run these commands in your VS Code terminal to create package files and install dependencies for each service:
 
 1. Property Microservice (Port 3001)
-  Bash
-  cd backend/property-service
-  npm init -y
-  npm install express mongoose cors dotenv
-  Create backend/property-service/.env:
+    Bash
+    cd backend/property-service
+    npm init -y
+    npm install express mongoose cors dotenv
+    Create backend/property-service/.env:
 
 Code snippet
     PORT=3001
