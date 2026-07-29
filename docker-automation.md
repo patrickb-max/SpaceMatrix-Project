@@ -328,3 +328,37 @@
         git add .
         git commit -m "feat: complete docker automation setup and bootstrap script"
         git push origin docker-automation
+
+
+
+=========================================================================================================================
+
+Semi-Implementation:
+====================
+
+create Dockerfile 
+
+            # Dockerfile
+
+            FROM node:20-alpine
+            WORKDIR /usr/src/app
+            COPY package*.json ./
+            RUN npm install
+            COPY . .
+            EXPOSE 3001
+            CMD ["node", "src/index.js"]
+
+    # builds the image 
+    docker build -t test-property-service .
+
+    # docker run
+    docker run -p 3001:3001 -e PORT=3001 -e MONGO_URI=mongodb://host.docker.internal:27017/spacematrix test-property-service
+
+    check: 
+
+    localhost:3001
+    -----------success-------------
+
+    
+
+
