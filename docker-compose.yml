@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  # 1. Database Service (Uses offical image directly, no Dockerfile needed)
+  mongodb:
+    image: mongo:latest
+    container_name: spacematrix-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - spacematrix-net
+  
+  # 2. Properties Service (Uses Dockerfile in ./backend/property-service)
+  property-service:
+    build:
+      context: ./backend/property-service   # Path to the directory containing the Dockerfile
+      dockerfile: Dockerfile                # Path to the Dockerfile
+    container_name: spacematrix-property-service
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - MONGO_URI=mongodb://mongodb:27017/spacematrix  # Uses service name "mongodb" as hostname
+    depends_on:
+      - mongodb     
+    networks:
+      - spacematrix-net
+
+  # 3. Analytics Service (Uses Dockerfile in ./backend/analytics-service)
+  analytics-service:  
+    build:
+      context: ./backend/analytics-service
+      dockerfile: Dockerfile
+    container_name: spacematrix-analytics-service
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - MONGO_URI=mongodb://mongodb:27017/spacematrix  # Uses service name "mongodb" as hostname
+    depends_on:
+      - mongodb
+    networks:
+      - spacematrix-net
+  
+  # 4. Inquiry Service (Uses Dockerfile in ./backend/inquiry-service)
+  inquiry-service:
+    build:
+      context: ./backend/inquiry-service
+      dockerfile: Dockerfile
+    container_name: spacematrix-inquiry-service
+    ports:
+      - "3003:3003"
+    environment:
+      - PORT=3003
+      - MONGO_URI=mongodb://mongodb:27017/spacematrix  # Uses service name "mongodb" as hostname
+    depends_on:
+      - mongodb
+    networks:
+      - spacematrix-net
+
+  # 5. Notification Service (Uses Dockerfile in ./backend/notification-service)
+  notification-service:
+    build:
+      context: ./backend/notification-service
+      dockerfile: Dockerfile
+    container_name: spacematrix-notification-service
+    ports:
+      - "3004:3004"
+    environment:        
+      - PORT=3004
+      - MONGO_URI=mongodb://mongodb:27017/spacematrix  # Uses service name "mongodb" as hostname  
+    depends_on:
+      - mongodb
+    networks:
+      - spacematrix-net
+  
+  
+  # Define a volume for MongoDB data persistence
+networks:
+  spacematrix-net:
+    driver: bridge
+
+volumes:
+  mongo_data: 
