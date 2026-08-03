@@ -336,7 +336,7 @@
 Semi-Implementation:
 ====================
 
-create Dockerfile 
+create Dockerfile for property service
 
             # Dockerfile
 
@@ -359,6 +359,148 @@ create Dockerfile
     localhost:3001
     -----------success-------------
 
-    
+
+    Create Dockerfile for analytics-service
+                #Docker file for analytics-service
+
+            # 1. Base Image: Use light weight Node 20 environment
+            FROM node:20-alpine
+
+            # 2. Working Directory: Set the default directory inside the container
+            WORKDIR /usr/src/app
+
+            # 3. Cache Optimisation: Copy dependency manifests: first to leverage Docker cache
+            COPY package*.json ./
+
+            # 4. Dependencies: Install production packages
+            RUN npm install
+
+            # 5. Application Code: Copy the rest of the microservices/ application files
+            COPY . .
+
+            # 6. Documentation: Indicate which PORT your Express app exposes
+            EXPOSE 3003
+
+            # 7. Execution: Default command to run the application when container starts 
+            CMD ["node", "src/index.js"]
+    🎉 Massive milestone! All 4 microservices in your SpaceMatrix backend architecture are containerized, running on their assigned ports, and connected to MongoDB:
+
+            ┌─────────────────────────────────────────────────────────────┐
+            │                      SPACEMATRIX BACKEND                    │
+            ├───────────────────┬──────┬──────────────────────────────────┤
+            │ Microservice      │ Port │ Status                           │
+            ├───────────────────┼──────┼──────────────────────────────────┤
+            │ Property Service  │ 3001 │ 🟢 Active (test-property)        │
+            │ Analytics Service │ 3002 │ 🟢 Active (test-analytics)       │
+            │ Inquiry Service   │ 3003 │ 🟢 Active (test-inquiry)         │
+            │ Notification Svc  │ 3004 │ 🟢 Active (test-notification)    │
+            └───────────────────┴──────┴──────────────────────────────────┘
 
 
+    Create Dockerfile for inquiry-service
+
+            # Docker file for `inquiry-service` 
+
+            # 1. Base Image: Use light weight Node 20 environment
+            FROM node:20-alpine
+
+            # 2. Working Directory: Set the default directory inside the container
+            WORKDIR /usr/src/app
+
+            # 3. Cache Optimization: Copy dependency manifests first to leverage Docker cache
+            COPY package*.json ./
+
+            # 4. Dependencies: Install production packages
+            RUN npm install
+
+            # 5. Application Code: Copy the rest of the microservices/ application files
+            COPY . .
+
+            # 6. Documentation: Indicate which PORT your Express app exposes
+            EXPOSE 3002
+
+            # 7. Execution: Default command to run the application when container starts 
+            CMD ["node", "src/index.js"]
+
+
+    Create the Dockerfile for Notification-service:
+
+                        #Dockerfile for notification-service
+            # 1. Base Image: Use light weight Node 20 environment
+            FROM node:20-alpine
+
+            # 2. Working Directory: Set the default directory inside the container
+            WORKDIR /usr/src/app        
+
+            # 3. Cache Optimisation: Copy dependency manifests: first to leverage Docker cache
+            COPY package*.json ./
+
+            # 4. Dependencies: Install production packages
+            RUN npm install
+
+            # 5. Application Code: Copy the rest of the microservices/ application files
+            COPY . .
+
+            # 6. Documentation: Indicate which PORT your Express app exposes
+            EXPOSE 3004
+
+            # 7. Execution: Default command to run the application when container starts 
+            CMD ["node", "src/index.js"]        
+
+
+    Create a Dockerfile for Property-service
+
+            # Dockerfile
+
+            # 1. Base Image: Use light weight Node 20 environment
+            FROM node:20-alpine
+
+            # 2. Working Directory: Set the default directory inside the container
+            WORKDIR /usr/src/app
+
+            # 3. Cache Optimization: Copy dependency manifests first to leverage Docker cache
+            COPY package*.json ./
+
+            # 4. Dependencies: Install production packages
+            RUN npm install 
+
+            # 5. Application Code: Copy the rest of the microservices/ application files
+            COPY . .
+
+            # 6. Docmentation: Indicate which PORT your Express app exposes
+            EXPOSE 3001
+
+            # 7. Execution: Default command to run the application when container starts 
+            CMD ["node", "src/index.js"]
+
+        Manual- testing for docker:
+
+        step-1: Build the Images
+        Step-2: Run the Images
+
+        Build the Image: 
+            <docker build -t <image name>:<tag> . >
+
+            docker build -t test-property-service .
+        
+        Run the Image:
+
+            < docker run -d --rm 
+                -p <host-port>:<Container-port> 
+                -e PORT=<container-port> 
+                -e MONGO_URI=mongodb://host.docker.internal:27017/spacematrix 
+                --name <container-name>
+                <image-name>:<tag>>
+
+            docker run -d -p <> -e PORT=<> -e MONG_URI=<> --name <> Imagename<>
+
+            docker run -d -p 3001:3001 -e PORT=3001 -e MONGO_URI=mongodb://host.docker.internal:27017/spacematrix --name test-property-service test-property-service:latest 
+
+
+        🔑 Flag Quick Reference
+            Flag        Name                What It Does    
+            -d          Detached            Runs container in the background (frees up terminal).   
+            --rm        Auto-Remove         Automatically deletes container when stopped (prevents name conflict errors).
+            -p          Port Mapping        Maps Host Port : Container Port (e.g., -p 3001:3001).   
+            -e          Environment Var     Passes variables to Node.js (e.g., -e PORT=3001).   
+            --name      Container Name      Sets a readable container name instead of random letters.

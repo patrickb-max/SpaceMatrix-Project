@@ -1,4 +1,4 @@
-const Metric = require('../models/Metric');
+const Metric = require('../models/metric');
 
 exports.trackEvent = async (req, res) => {
   try {
