@@ -671,3 +671,55 @@ Implementation of Compose file:
 
                 volumes:
                 mongo_data: 
+
+
+
+     build cmd: 
+        docker-compose up --build -d
+
+        docker-compose ps
+
+
+        curl Commands for property-service (Port 3001)
+
+        1. GET All Properties
+            Bash
+            curl -X GET http://localhost:3001/api/v1/properties
+
+        2. POST (Create) a Property
+            curl -X POST http://localhost:3001/api/v1/properties \
+            -H "Content-Type: application/json" \
+            -d '{"title": "Luxury Docker Apartment", "price": 850000, "location": "Tech Hub"}'
+
+        Check Route Prefixes for the Other 3 Services:
+
+            grep -rn "app.use" backend/*/src/
+
+
+
+
+    ADMIN@DESKTOP-1M2QVFG MINGW64 /d/practice_projects/SpaceMatrix-Project (docker-automation)
+                $ curl -X POST http://localhost:3001/api/v1/properties \
+                -H "Content-Type: application/json" \
+                -d '{"title": "Luxury Docker Apartment", "price": 850000, "location": "Tech Hub"}'
+                {"error":"Property validation failed: totalMonthlyRent: Path `totalMonthlyRent` is required., rentPerSqFt: Path `rentPerSqFt` is required., totalArea: Path `totalArea` is required., propertyType: Path `propertyType` is required., description: Path `description` is required., name: Path `name` is required."}
+        
+        
+    ADMIN@DESKTOP-1M2QVFG MINGW64 /d/practice_projects/SpaceMatrix-Project (docker-automation)
+    
+        
+                $ grep -rn "app.use" backend/*/src/
+                backend/analytics-service/src/index.js:9:app.use(cors());
+                backend/analytics-service/src/index.js:10:app.use(express.json());
+                backend/analytics-service/src/index.js:12:app.use('/api/v1/analytics', analyticsRoutes);
+                backend/inquiry-service/src/index.js:8:app.use(cors());
+                backend/inquiry-service/src/index.js:9:app.use(express.json());
+                backend/inquiry-service/src/index.js:11:app.use('/api/v1/inquiries', inquiryRoutes);
+                backend/notification-service/src/index.js:9:app.use(cors());
+                backend/notification-service/src/index.js:10:app.use(express.json());
+                backend/notification-service/src/index.js:12:app.use('/api/v1/notifications', notificationRoutes);
+                backend/property-service/src/index.js:9:app.use(cors());
+                backend/property-service/src/index.js:10:app.use(express.json());
+                backend/property-service/src/index.js:12:app.use('/api/v1/properties', propertyRoutes);
+
+                ADMIN@DESKTOP-1M2QVFG MINGW64 /d/practice_projects/SpaceMatrix-Project (docker-automation)
